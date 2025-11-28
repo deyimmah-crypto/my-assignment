@@ -1,0 +1,371 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyM4Vfrrj/BGIbnVPx9WOHiO",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/deyimmah-crypto/my-assignment/blob/main/CIR203assignment\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "d2ed4b60",
+        "outputId": "3a411724-849b-48de-d8fa-f6ebaa5a8b49"
+      },
+      "source": [
+        "\n",
+        "products = {\n",
+        "    'Joystick': 15,\n",
+        "    'Mouse': 50,\n",
+        "    'Dvd': 20,\n",
+        "    'Scanner': 10,\n",
+        "    'Laser': 5\n",
+        "}\n",
+        "print(\"Initial Inventory:\")\n",
+        "print(products)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "\n",
+        "products['Headphones'] = 30\n",
+        "products['Mouse'] = 45\n",
+        "print(\"Inventory after adding new product and updating an existing one:\")\n",
+        "print(products)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "\n",
+        "def get_low_stock_products(inventory_dict):\n",
+        "    low_stock = {}\n",
+        "    for product, quantity in inventory_dict.items():\n",
+        "        if quantity < 10:\n",
+        "            low_stock[product] = quantity\n",
+        "    return low_stock\n",
+        "\n",
+        "low_stock_items = get_low_stock_products(products)\n",
+        "print(\"Products with stock less than 10:\")\n",
+        "print(low_stock_items)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "\n",
+        "del products['Laser']\n",
+        "print(\"Inventory after deleting 'Webcam':\")\n",
+        "print(products)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "# 5. Use .items() to loop through and print each product with its quantity\n",
+        "print(\"Current Product Inventory (using .items()):\")\n",
+        "for product, quantity in products.items():\n",
+        "    print(f\"{product}: {quantity}\")"
+      ],
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Initial Inventory:\n",
+            "{'Joystick': 15, 'Mouse': 50, 'Dvd': 20, 'Scanner': 10, 'Laser': 5}\n",
+            "\n",
+            "\n",
+            "Inventory after adding new product and updating an existing one:\n",
+            "{'Joystick': 15, 'Mouse': 45, 'Dvd': 20, 'Scanner': 10, 'Laser': 5, 'Headphones': 30}\n",
+            "\n",
+            "\n",
+            "Products with stock less than 10:\n",
+            "{'Laser': 5}\n",
+            "\n",
+            "\n",
+            "Inventory after deleting 'Webcam':\n",
+            "{'Joystick': 15, 'Mouse': 45, 'Dvd': 20, 'Scanner': 10, 'Headphones': 30}\n",
+            "\n",
+            "\n",
+            "Current Product Inventory (using .items()):\n",
+            "Joystick: 15\n",
+            "Mouse: 45\n",
+            "Dvd: 20\n",
+            "Scanner: 10\n",
+            "Headphones: 30\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XGL3yhvRVdMk",
+        "outputId": "cae33093-6b34-4762-b2e6-b28f87744046"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Transaction Volume Array (4 branches × 6 months):\n",
+            "[[1200 1350 1600 1450 1700 1800]\n",
+            " [1000 1100 1150 1200 1300 1250]\n",
+            " [ 900  950 1000 1050 1100 1200]\n",
+            " [1500 1600 1700 1650 1750 1900]]\n",
+            "Total Transactions Per Branch:\n",
+            "[ 9100  7000  6200 10100]\n",
+            "Branch with Highest Transactions: Branch 4\n",
+            "Average Monthly Transaction Volume Across All Branches:\n",
+            "1350.0\n",
+            "Reshaped Array (3 × 8):\n",
+            "[[1200 1350 1600 1450 1700 1800 1000 1100]\n",
+            " [1150 1200 1300 1250  900  950 1000 1050]\n",
+            " [1100 1200 1500 1600 1700 1650 1750 1900]]\n",
+            "\n",
+            "Implications of Reshaping:\n",
+            "- The data values remain the same, but their positions change.\n",
+            "- Reshaping does NOT combine, delete, or modify values; it only reorganizes them.\n",
+            "- The new shape must contain the same total number of elements (4×6 = 24 = 3×8).\n"
+          ]
+        }
+      ],
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "transactions = np.array([\n",
+        "    [1200, 1350, 1600, 1450, 1700, 1800],   # Branch 1\n",
+        "    [1000, 1100, 1150, 1200, 1300, 1250],   # Branch 2\n",
+        "    [900,  950,  1000, 1050, 1100, 1200],   # Branch 3\n",
+        "    [1500, 1600, 1700, 1650, 1750, 1900]    # Branch 4\n",
+        "])\n",
+        "\n",
+        "print(\"Transaction Volume Array (4 branches × 6 months):\")\n",
+        "print(transactions)\n",
+        "\n",
+        "branch_totals = np.sum(transactions, axis=1)\n",
+        "print(\"Total Transactions Per Branch:\")\n",
+        "print(branch_totals)\n",
+        "\n",
+        "highest_branch_index = np.argmax(branch_totals)\n",
+        "print(f\"Branch with Highest Transactions: Branch {highest_branch_index + 1}\")\n",
+        "\n",
+        "average_volume = np.mean(transactions)\n",
+        "print(\"Average Monthly Transaction Volume Across All Branches:\")\n",
+        "print(average_volume)\n",
+        "\n",
+        "reshaped = transactions.reshape(3, 8)\n",
+        "\n",
+        "print(\"Reshaped Array (3 × 8):\")\n",
+        "print(reshaped)\n",
+        "\n",
+        "print(\"\\nImplications of Reshaping:\")\n",
+        "print(\"- The data values remain the same, but their positions change.\")\n",
+        "print(\"- Reshaping does NOT combine, delete, or modify values; it only reorganizes them.\")\n",
+        "print(\"- The new shape must contain the same total number of elements (4×6 = 24 = 3×8).\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "Nb1bEURdaI9I"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "30ca84e5",
+        "outputId": "81fa3713-053b-4f81-f671-ec9f2e4becb9"
+      },
+      "source": [
+        "\n",
+        "routes = [\n",
+        "    'NorthKajiado Transport',\n",
+        "    'SouthC Route',\n",
+        "    'EastLands Movers',\n",
+        "    'WestLand Logistics',\n",
+        "    'CentralMbeere Logistics',\n",
+        "    'SkyTrack Freight',\n",
+        "    'RapidShift Delivery',\n",
+        "    'Nanyuki Express',\n",
+        "    'GPO Path',\n",
+        "    'NairobiConnect'\n",
+        "]\n",
+        "print(\"Initial Delivery Routes:\")\n",
+        "print(routes)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "# 2. Append a new route and remove a discontinued one\n",
+        "routes.append('SouthC RouteExpress')  # Append a new route\n",
+        "routes.remove('Nanyuki Express')     # Remove a discontinued route\n",
+        "print(\"Routes after adding and removing:\")\n",
+        "print(routes)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "# 3. Sort the list alphabetically and reverse it\n",
+        "routes.sort() # Sort alphabetically\n",
+        "routes.reverse() # Reverse the sorted list\n",
+        "print(\"Routes sorted alphabetically and then reversed:\")\n",
+        "print(routes)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "# 4. Count how many routes start with the letter “N”\n",
+        "count_N = 0\n",
+        "for route in routes:\n",
+        "    if route.startswith('N'):\n",
+        "        count_N += 1\n",
+        "print(f\"Number of routes starting with 'N': {count_N}\")\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "# 5. Use list comprehension to create a new list of routes longer than 15 characters\n",
+        "long_routes = [route for route in routes if len(route) > 15]\n",
+        "print(\"Routes longer than 15 characters (using list comprehension):\")\n",
+        "print(long_routes)"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Initial Delivery Routes:\n",
+            "['NorthKajiado Transport', 'SouthC Route', 'EastLands Movers', 'WestLand Logistics', 'CentralMbeere Logistics', 'SkyTrack Freight', 'RapidShift Delivery', 'Nanyuki Express', 'GPO Path', 'NairobiConnect']\n",
+            "\n",
+            "\n",
+            "Routes after adding and removing:\n",
+            "['NorthKajiado Transport', 'SouthC Route', 'EastLands Movers', 'WestLand Logistics', 'CentralMbeere Logistics', 'SkyTrack Freight', 'RapidShift Delivery', 'GPO Path', 'NairobiConnect', 'SouthC RouteExpress']\n",
+            "\n",
+            "\n",
+            "Routes sorted alphabetically and then reversed:\n",
+            "['WestLand Logistics', 'SouthC RouteExpress', 'SouthC Route', 'SkyTrack Freight', 'RapidShift Delivery', 'NorthKajiado Transport', 'NairobiConnect', 'GPO Path', 'EastLands Movers', 'CentralMbeere Logistics']\n",
+            "\n",
+            "\n",
+            "Number of routes starting with 'N': 2\n",
+            "\n",
+            "\n",
+            "Routes longer than 15 characters (using list comprehension):\n",
+            "['WestLand Logistics', 'SouthC RouteExpress', 'SkyTrack Freight', 'RapidShift Delivery', 'NorthKajiado Transport', 'EastLands Movers', 'CentralMbeere Logistics']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8b41058c"
+      },
+      "source": [
+        "### Explanation: Why Tuples are Suitable for Storing Patient Vitals (Task 3)\n",
+        "\n",
+        "Tuples are ideal for storing patient vitals because:\n",
+        "\n",
+        "*   **Immutability:** Once created, the elements of a tuple cannot be changed. This is crucial for medical records where data integrity is paramount. You wouldn't want a patient's recorded vitals to be accidentally altered.\n",
+        "*   **Data Integrity:** The immutability ensures that a specific set of vitals (like blood pressure and heart rate taken at a particular time) remains constant as an unchangeable record.\n",
+        "*   **Ordered Collection:** Tuples maintain the order of elements, which is important for consistently representing vital signs (e.g., always knowing the heart rate is the fourth element).\n",
+        "*   **Heterogeneous Data:** Tuples can store different data types (e.g., string for name, integer for age, float for blood pressure), which is necessary for patient vital records.\n",
+        "*   **Read-Only Access:** They are optimized for read-only operations, making them efficient for retrieving historical vital records."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "810affde",
+        "outputId": "934fc36d-70e9-469f-8769-3b5754aab7d2"
+      },
+      "source": [
+        "# 1. Create a tuple for a patient containing: (Name, Age, BloodPressure, HeartRate)\n",
+        "patient_vitals = (\"Alice Njeri\", 34, \"120/80\", 72)\n",
+        "print(f\"Patient Vitals Tuple: {patient_vitals}\")\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "\n",
+        "patient_age = patient_vitals[1]\n",
+        "patient_heart_rate = patient_vitals[3]\n",
+        "print(f\"Patient's Age: {patient_age}\")\n",
+        "print(f\"Patient's Heart Rate: {patient_heart_rate}\")\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "\n",
+        "print(f\"Original Heart Rate: {patient_vitals[3]}\")\n",
+        "patient_vitals_list = list(patient_vitals)\n",
+        "patient_vitals_list[3] = 76\n",
+        "patient_vitals_updated = tuple(patient_vitals_list)\n",
+        "print(f\"Updated Patient Vitals Tuple (after heart rate change): {patient_vitals_updated}\")\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "\n",
+        "all_patients_vitals = (\n",
+        "    (\"Alice Njeri\", 34, \"120/80\", 72),\n",
+        "    (\"Bob Mwangi\", 52, \"130/85\", 78),\n",
+        "    (\"Charlie Ndono\", 28, \"115/75\", 68),\n",
+        "    (\"Diana Wambui\", 41, \"125/82\", 75),\n",
+        "    (\"Eve Wainana\", 60, \"140/90\", 80)\n",
+        ")\n",
+        "\n",
+        "print(\"All Patient Vitals (Tuple of Tuples):\")\n",
+        "for patient in all_patients_vitals:\n",
+        "    print(patient)\n",
+        "print(\"\\n\")\n",
+        "\n",
+        "patient_names = [patient[0] for patient in all_patients_vitals]\n",
+        "print(f\"Extracted Patient Names: {patient_names}\")"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Patient Vitals Tuple: ('Alice Njeri', 34, '120/80', 72)\n",
+            "\n",
+            "\n",
+            "Patient's Age: 34\n",
+            "Patient's Heart Rate: 72\n",
+            "\n",
+            "\n",
+            "Original Heart Rate: 72\n",
+            "Updated Patient Vitals Tuple (after heart rate change): ('Alice Njeri', 34, '120/80', 76)\n",
+            "\n",
+            "\n",
+            "All Patient Vitals (Tuple of Tuples):\n",
+            "('Alice Njeri', 34, '120/80', 72)\n",
+            "('Bob Mwangi', 52, '130/85', 78)\n",
+            "('Charlie Ndono', 28, '115/75', 68)\n",
+            "('Diana Wambui', 41, '125/82', 75)\n",
+            "('Eve Wainana', 60, '140/90', 80)\n",
+            "\n",
+            "\n",
+            "Extracted Patient Names: ['Alice Njeri', 'Bob Mwangi', 'Charlie Ndono', 'Diana Wambui', 'Eve Wainana']\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
